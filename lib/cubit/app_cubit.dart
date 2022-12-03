@@ -18,17 +18,22 @@ class AppCubit extends Cubit<AppState> {
 
   // Logica de negocio para hacer el login contra backend
   void login(String username, String password) async {
+    //emite un evento para que la ui sera que se esta haciendo el login
     emit(AppState(isUserLoggedIn: false, isLoading: true));
+    await Future.delayed(const Duration(seconds: 3));
 
     try {
       var loginResponseDto = await LoginService.login(username, password);
-
+      // si lo anterios salio bien  enviamos un evento para que la UI sepa que el login fue exitoso
       emit(AppState(
           isUserLoggedIn: true,
           isLoading: false,
           loginResponseDto: loginResponseDto));
     } catch (error) {
+      // si lo anterior salio mal enviamos un evento para que la UI sepa que el login fue fallido
       emit(AppState(isUserLoggedIn: false, isLoading: false));
     }
   }
+
+  void logout() {}
 }
