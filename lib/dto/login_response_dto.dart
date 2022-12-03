@@ -6,22 +6,11 @@
 
 class LoginResponseDto {
   final String? token;
-  final String? refreshToken;
-  final String firstName;
-  final String lastName;
+  final String? refresh;
 
-  LoginResponseDto(
-      {required this.token,
-      required this.refreshToken,
-      required this.firstName,
-      required this.lastName});
+  LoginResponseDto({this.token, this.refresh});
 
   factory LoginResponseDto.fromJson(Map<String, dynamic> json) {
-    return LoginResponseDto(
-      token: json['token'],
-      refreshToken: json['refreshToken'],
-      firstName: json['firstname'],
-      lastName: json['lastName'],
-    );
+    return LoginResponseDto(token: json['token'], refresh: json['refresh']);
   }
 }
